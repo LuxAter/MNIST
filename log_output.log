@@ -1,0 +1,13 @@
+SUCCESS>>Opened log: log_output.log>>pessum_files/logging.cpp/InitializeLogging
+INFORMATION>>Sat Dec 10 10:11:33 2016>>TimeStamp
+SUCCESS>>Initialized SDL>>aequus_files/framework/InitializeSdl
+SUCCESS>>Initialized SDL IMG>>aequus_files/framework/InitalizeImg
+SUCCESS>>Initialized SDL TTG>>aequus_files/framework/InitializeTtf
+SUCCESS>>Initialized SDL Mixer>>aequus_files/framework/InitializeMixer
+DATA>>SDL versions match: 2.0.4>>aequus_files/framework/CheckSdlVersions
+SUCCESS>>Created new SDL window: Nerual MNIST Network>>aequus_files/video/window[Nerual MNIST Network]/CreateWindow
+SUCCESS>>Create renderer>>aequus_files/video/window[Nerual MNIST Network]/rendererCreateRenderer
+SUCCESS>>Terminated window: Nerual MNIST Network>>aequus_files/video/window[Nerual MNIST Network]/TerminateWindow
+SUCCESS>>Terminated all SDL systems>>aequus_files/framework/TermianteSdl
+SUCCESS>>Terminated log file>>Pessum/logging.cpp/TerminateLogging
+INFORMATION>>Sat Dec 10 10:11:36 2016>>TimeStamp
