@@ -54,3 +54,9 @@ void neural::display::SetImagePosition(int ix, int iy) {
     }
   }
 }
+
+void neural::display::EraseImage() {
+  aequus::video::win->objects.erase(
+      aequus::video::win->objects.begin() + firstpixel,
+      aequus::video::win->objects.begin() + lastpixel);
+}

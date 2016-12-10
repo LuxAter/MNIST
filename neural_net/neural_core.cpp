@@ -17,7 +17,7 @@ void neural::MainLoop() {
   int framecounter = 0;
   aequus::video::win->windowrenderer.SetColor(0.8, 0.8, 0.8, 1);
   while (running == true && aequus::video::AllClose() == false) {
-    if (framecounter <= 10) {
+    if (framecounter <= 10000) {
       LoadingFrame(framecounter);
     }
     aequus::Frame();
@@ -61,10 +61,11 @@ void neural::LoadingFrame(int frame) {
       // aequus::video::win->objects[i].TerminateObject();
     }
     aequus::video::win->objects.clear();
-  } else if (frame == 5) {
-    display::DrawImage(0, false, 100);
-  } else if (frame == 10) {
-    display::SetImagePosition(100, 100);
+  } else if (frame % 10 == 0) {
+    if (frame > 10) {
+      display::EraseImage();
+    }
+    display::DrawImage((frame / 10) - 1, false, 500);
   }
 }
 

@@ -5,6 +5,7 @@ namespace display {
 extern int firstpixel, lastpixel, imagesize;
 void DrawImage(int index, bool testset, int size = 280);
 void SetImagePosition(int ix, int iy);
+void EraseImage();
 }
 }
 #endif
