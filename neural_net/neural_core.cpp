@@ -1,4 +1,5 @@
 #include "display.h"
+#include "execute.h"
 #include "load.h"
 #include "neural_core.h"
 #include <aequus_headers.h>
@@ -9,15 +10,15 @@
 namespace neural {
 std::vector<Image> trainingset;
 std::vector<Image> testingset;
-std::vector<std::vector<Sigmoid>> neurons;
 }
 
 void neural::MainLoop() {
   bool running = true;
   int framecounter = 0;
   aequus::video::win->windowrenderer.SetColor(0.8, 0.8, 0.8, 1);
+  display::InitializeDisplay();
   while (running == true && aequus::video::AllClose() == false) {
-    if (framecounter <= 10000) {
+    if (framecounter <= 2000) {
       LoadingFrame(framecounter);
     }
     aequus::Frame();
@@ -63,28 +64,9 @@ void neural::LoadingFrame(int frame) {
     aequus::video::win->objects.clear();
   } else if (frame % 10 == 0) {
     if (frame > 10) {
-      display::EraseImage();
+      // display::EraseImage();
     }
-    display::DrawImage((frame / 10) - 1, false, 500);
-  }
-}
-
-void neural::GenorateNetwork(std::vector<int> layerneurons) {
-  for (int i = 0; i < layerneurons.size(); i++) {
-    std::vector<Sigmoid> layer;
-    for (int j = 0; j < layerneurons[i]; j++) {
-      Sigmoid neuron;
-      neuron.bias = 0.5;
-      neuron.output = 0;
-      if (i > 0) {
-        for (int k = 0; k < layerneurons[i - 1]; k++) {
-          neuron.weights.push_back(1);
-        }
-      } else {
-        neuron.weights.push_back(0);
-      }
-      layer.push_back(neuron);
-    }
-    neurons.push_back(layer);
+    // display::DrawImage((frame / 10) - 1, false, 100);
+    // display::DrawImageData((frame / 10) - 1, false);
   }
 }

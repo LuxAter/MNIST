@@ -7,8 +7,18 @@
 
 namespace neural {
 namespace display {
+int logloc = 0;
 int firstpixel = 0, lastpixel = 0, imagesize;
+int indexcounter = 0, labelobj = 0;
 }
+}
+
+void neural::display::InitializeDisplay() {
+  // logloc = pessum::logging::AddLogLocation("neural_net/display.cpp/");
+  indexcounter = aequus::video::win->objects.size();
+  aequus::video::NewObject();
+  labelobj = aequus::video::win->objects.size();
+  aequus::video::NewObject();
 }
 
 void neural::display::DrawImage(int index, bool testset, int size) {
@@ -59,4 +69,18 @@ void neural::display::EraseImage() {
   aequus::video::win->objects.erase(
       aequus::video::win->objects.begin() + firstpixel,
       aequus::video::win->objects.begin() + lastpixel);
+}
+
+void neural::display::DrawImageData(int index, bool testset) {
+  aequus::video::win->objects[indexcounter].CreateTextObj(
+      "#: " + std::to_string(index), 20, 0, 0, 0, 1);
+  if (testset == false) {
+    aequus::video::win->objects[labelobj].CreateTextObj(
+        "Value: " + std::to_string(trainingset[index].label), 20, 0, 0, 0, 1);
+  } else if (testset == true) {
+    aequus::video::win->objects[labelobj].CreateTextObj(
+        "Value: " + std::to_string(testingset[index].label), 20, 0, 0, 0, 1);
+  }
+  aequus::video::win->objects[indexcounter].SetPos(0, 110);
+  aequus::video::win->objects[labelobj].SetPos(0, 130);
 }
