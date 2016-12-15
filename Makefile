@@ -52,3 +52,6 @@ help:
 	@echo make clean
 	@echo make tar
 	@echo make log
+
+.PHONY : new
+new: clean all
