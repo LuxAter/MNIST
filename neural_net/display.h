@@ -4,6 +4,13 @@
 #include <vector>
 namespace neural {
 namespace display {
+struct Range {
+  int first, last;
+};
+struct Text {
+  std::string text = "";
+  int object = -1;
+};
 extern int logloc, layout;
 extern int imageindex;
 extern bool testset;

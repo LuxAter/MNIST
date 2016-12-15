@@ -19,9 +19,12 @@ void neural::MainLoop() {
   display::InitializeDisplay();
   while (running == true && aequus::video::AllClose() == false) {
     if (framecounter <= 1000) {
+      aequus::framework::Timmer(true);
       LoadingFrame(framecounter);
       display::Display();
+      std::cout << "F:" << aequus::framework::Timmer(false) << "\n";
     }
+    aequus::framework::Timmer(true);
     aequus::Frame();
     if (aequus::input::events.size() > 0) {
       if (aequus::input::events[0].type == aequus::input::KEYBOARD &&
@@ -30,6 +33,8 @@ void neural::MainLoop() {
       }
     }
     framecounter++;
+    std::cout << "A:" << aequus::framework::Timmer(false) << "\n";
+    std::cout << aequus::video::win->objects.size() << "\n";
   }
 }
 
@@ -52,5 +57,6 @@ void neural::LoadingFrame(int frame) {
     display::AddTerminalText(
         "#" + std::to_string(round(frame / 10) - 1) + " = " +
         std::to_string(testingset[round(frame / 10) - 1].label));
+    // display::AddTerminalText(std::to_string(rand()));
   }
 }
