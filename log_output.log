@@ -1,5 +1,5 @@
 SUCCESS>>Opened log: log_output.log>>pessum_files/logging.cpp/InitializeLogging
-INFORMATION>>Thu Dec 15 11:52:28 2016>>TimeStamp
+INFORMATION>>Thu Dec 15 16:02:29 2016>>TimeStamp
 SUCCESS>>Initialized SDL>>aequus_files/framework/InitializeSdl
 ERROR>>Failed to initialize SDL IMG>>aequus_files/framework/InitalizeImg
 ERROR>>SDL Error: >>AEQUUS SDL ERROR
@@ -8,13 +8,9 @@ SUCCESS>>Initialized SDL Mixer>>aequus_files/framework/InitializeMixer
 DATA>>SDL versions match: 2.0.4>>aequus_files/framework/CheckSdlVersions
 SUCCESS>>Created new SDL window: Nerual MNIST Network>>aequus_files/video/window[Nerual MNIST Network]/CreateWindow
 SUCCESS>>Create renderer>>aequus_files/video/window[Nerual MNIST Network]/rendererCreateRenderer
-WARNING>>FPS < 30: 3.000000>>aequus_files/aequus_core.cpp/Frame
-INFORMATION>>11:52:40>>TimeStamp
-WARNING>>FPS < 30: 8.000000>>aequus_files/aequus_core.cpp/Frame
-INFORMATION>>11:52:51>>TimeStamp
-WARNING>>FPS < 30: 7.000000>>aequus_files/aequus_core.cpp/Frame
-INFORMATION>>11:53:02>>TimeStamp
+WARNING>>FPS < 30: 4.000000>>aequus_files/aequus_core.cpp/Frame
+INFORMATION>>16:02:40>>TimeStamp
 SUCCESS>>Terminated window: Nerual MNIST Network>>aequus_files/video/window[Nerual MNIST Network]/TerminateWindow
 SUCCESS>>Terminated all SDL systems>>aequus_files/framework/TermianteSdl
 SUCCESS>>Terminated log file>>Pessum/logging.cpp/TerminateLogging
-INFORMATION>>Thu Dec 15 11:53:12 2016>>TimeStamp
+INFORMATION>>Thu Dec 15 16:02:45 2016>>TimeStamp

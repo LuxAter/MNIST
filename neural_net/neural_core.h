@@ -3,7 +3,7 @@
 #include <vector>
 namespace neural {
 struct Image {
-  int label, index;
+  int label = -1, index = -1;
   std::vector<double> pixels;
 };
 extern std::vector<Image> trainingset;

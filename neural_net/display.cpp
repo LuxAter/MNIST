@@ -45,6 +45,11 @@ void neural::display::Display() {
 
 void neural::display::DrawImage(int index, bool test, int size) {
   if (firstpixel == -1 && lastpixel == -1) {
+    aequus::video::NewObject();
+    aequus::video::win->obj->CreateImgObj("pixel.png");
+    aequus::video::win->obj->SetPos(0, 0);
+    aequus::video::win->obj->Scale(size, size);
+    aequus::video::win->obj->SetColor(0.2, 0.2, 0.2, 1);
     firstpixel = aequus::video::win->objects.size();
   }
   imagesize = size;
@@ -62,12 +67,10 @@ void neural::display::DrawImage(int index, bool test, int size) {
       double color = fabs((pixeldata[i] / (double)255) - 1);
       if (i + firstpixel >= aequus::video::win->objects.size()) {
         aequus::video::NewObject();
-      } else {
-        aequus::video::win->objects[i + firstpixel].TerminateObject();
+        aequus::video::win->objects[i + firstpixel].CreateImgObj("pixel.png");
+        aequus::video::win->objects[i + firstpixel].SetPos(x, y);
+        aequus::video::win->objects[i + firstpixel].Scale(pixelsize, pixelsize);
       }
-      aequus::video::win->objects[i + firstpixel].CreateImgObj("pixel.png");
-      aequus::video::win->objects[i + firstpixel].SetPos(x, y);
-      aequus::video::win->objects[i + firstpixel].Scale(pixelsize, pixelsize);
       aequus::video::win->objects[i + firstpixel].SetColor(color, color, color,
                                                            1);
       x += pixelsize;
@@ -76,6 +79,7 @@ void neural::display::DrawImage(int index, bool test, int size) {
         y += pixelsize;
       }
     }
+    SetImagePosition((size % 28) / 2, (size % 28) / 2);
   } else {
     pessum::logging::Log(pessum::logging::LOG_WARNING, "Incorrect images size");
   }
@@ -99,18 +103,11 @@ void neural::display::SetImagePosition(int ix, int iy) {
   }
 }
 
-void neural::display::EraseImage() {
-  for (int i = firstpixel; i <= lastpixel; i++) {
-  }
-  // aequus::video::win->objects.erase(
-  //    aequus::video::win->objects.begin() + firstpixel,
-  //    aequus::video::win->objects.begin() + lastpixel);
-}
+void neural::display::EraseImage() {}
 
 void neural::display::DrawImageData(int index, bool testset) {}
 
 void neural::display::DisplayTerminal(int size) {
-  // std::cout << firstterminal << "/" << lastterminal << "<<\n";
   if (firstterminal == -1 && lastterminal == -1) {
     aequus::video::NewObject();
     aequus::video::win->obj->CreateImgObj("pixel.png");
@@ -118,11 +115,13 @@ void neural::display::DisplayTerminal(int size) {
     aequus::video::win->obj->Scale(size, size * 2);
     aequus::video::win->obj->SetColor(0.2, 0.2, 0.2, 1);
     firstterminal = aequus::video::win->objects.size();
+    for (int i = 0; i < (size / 8); i++) {
+      aequus::video::NewObject();
+      aequus::video::win->objects[i + firstterminal].CreateTextObj(" ", 12, 1,
+                                                                   1, 1, 1);
+    }
   }
   for (int i = 0; i < terminaltext.size() && i < (size / 8); i++) {
-    if (i + firstterminal >= aequus::video::win->objects.size()) {
-      aequus::video::NewObject();
-    }
     aequus::video::win->objects[i + firstterminal].TerminateObject();
     aequus::video::win->objects[i + firstterminal].CreateTextObj(
         terminaltext[i], 12, 1, 1, 1, 1);

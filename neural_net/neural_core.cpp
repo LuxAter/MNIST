@@ -15,16 +15,13 @@ std::vector<Image> testingset;
 void neural::MainLoop() {
   bool running = true;
   int framecounter = 0;
-  aequus::video::win->windowrenderer.SetColor(0.8, 0.8, 0.8, 1);
+  aequus::video::win->windowrenderer.SetColor(0.9, 0.9, 0.9, 1);
   display::InitializeDisplay();
   while (running == true && aequus::video::AllClose() == false) {
     if (framecounter <= 1000) {
-      aequus::framework::Timmer(true);
       LoadingFrame(framecounter);
-      display::Display();
-      std::cout << "F:" << aequus::framework::Timmer(false) << "\n";
     }
-    aequus::framework::Timmer(true);
+    display::Display();
     aequus::Frame();
     if (aequus::input::events.size() > 0) {
       if (aequus::input::events[0].type == aequus::input::KEYBOARD &&
@@ -33,8 +30,6 @@ void neural::MainLoop() {
       }
     }
     framecounter++;
-    std::cout << "A:" << aequus::framework::Timmer(false) << "\n";
-    std::cout << aequus::video::win->objects.size() << "\n";
   }
 }
 
@@ -52,11 +47,11 @@ void neural::LoadingFrame(int frame) {
     display::AddTerminalText("Loading Testing Label Data Set");
   } else if (frame == 4) {
     load::LoadImageLabels(true);
-  } else if (frame % 10 == 0) {
-    display::SetImage(round(frame / 10) - 1, false);
+  } else if (frame >= 0) {
+    frame = frame * 10;
+    display::SetImage((frame / 10) - 1, false);
     display::AddTerminalText(
-        "#" + std::to_string(round(frame / 10) - 1) + " = " +
-        std::to_string(testingset[round(frame / 10) - 1].label));
-    // display::AddTerminalText(std::to_string(rand()));
+        "#" + std::to_string((frame / 10) - 1) + ": " +
+        std::to_string(trainingset[(frame / 10) - 1].label));
   }
 }

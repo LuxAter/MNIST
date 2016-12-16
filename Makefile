@@ -7,7 +7,6 @@ LINKER_FLAGS = -laequus -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
 PROGRAM_NAME = mnist
 
 all: subsystem top_obj $(PROGRAM_NAME)
-	clear
 	@echo Compleated compiling $(PROGRAM_NAME)
 
 $(PROGRAM_NAME): $(OBJ_FILES) $(wildcard */*.o) $(wildcard */*/*.o) $(wildcard */*/*/*.o)
@@ -36,7 +35,6 @@ clean:
 	rm -f */*/*.d
 	rm -f */*/*/*.o
 	rm -f */*/*/*.d
-	clear
 	@echo Cleared all '.o' and '.d' files
 
 .PHONY : tar
