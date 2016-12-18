@@ -64,7 +64,7 @@ void neural::display::DrawImage(int index, bool test, int size) {
     lastpixel = firstpixel + 784;
     int x = 0, y = 0;
     for (int i = 0; i < pixeldata.size(); i++) {
-      double color = fabs((pixeldata[i] / (double)255) - 1);
+      double color = fabs(pixeldata[i] - 1);
       if (i + firstpixel >= aequus::video::win->objects.size()) {
         aequus::video::NewObject();
         aequus::video::win->objects[i + firstpixel].CreateImgObj("pixel.png");

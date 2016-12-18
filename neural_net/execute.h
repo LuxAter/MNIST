@@ -16,12 +16,10 @@ extern int batchsize, epochs, learningrate;
 extern bool testing;
 bool ExecutionCore();
 double Sigmoid(double z);
-std::vector<double> Sigmoid(std::vector<double> z);
 std::vector<double> FeedForward(std::vector<double> pixeldata);
 bool ShuffleData();
 bool GradientDecent();
 bool GenorateNetwork(std::vector<int> neurons);
-double Dot(std::vector<double> a, std::vector<Neuron> b);
 double drand();
 }
 }

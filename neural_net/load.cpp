@@ -1,8 +1,8 @@
-#include "load.h"
-#include "neural_core.h"
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include "load.h"
+#include "neural_core.h"
 
 void neural::load::LoadImages() {
   LoadImageSet(false);
@@ -36,7 +36,7 @@ void neural::load::LoadImageSet(bool testset) {
         for (int k = 0; k < n_cols; k++) {
           unsigned char temp = 0;
           file.read((char *)&temp, sizeof(temp));
-          newimage.pixels.push_back((double)temp);
+          newimage.pixels.push_back((double)(temp / 255.0));
         }
       }
       if (testset == false) {

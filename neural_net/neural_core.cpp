@@ -18,8 +18,11 @@ void neural::MainLoop() {
   aequus::video::win->windowrenderer.SetColor(0.9, 0.9, 0.9, 1);
   display::InitializeDisplay();
   while (running == true && aequus::video::AllClose() == false) {
-    if (framecounter <= 1000) {
+    if (framecounter <= 10) {
       LoadingFrame(framecounter);
+    }
+    if (framecounter == 11) {
+      execute::ExecutionCore();
     }
     display::Display();
     aequus::Frame();
@@ -47,11 +50,9 @@ void neural::LoadingFrame(int frame) {
     display::AddTerminalText("Loading Testing Label Data Set");
   } else if (frame == 4) {
     load::LoadImageLabels(true);
-  } else if (frame >= 0) {
-    frame = frame * 10;
-    display::SetImage((frame / 10) - 1, false);
-    display::AddTerminalText(
-        "#" + std::to_string((frame / 10) - 1) + ": " +
-        std::to_string(trainingset[(frame / 10) - 1].label));
+    display::AddTerminalText("Genorating Neural Network");
+  } else if (frame == 5) {
+    std::vector<int> neurons = {784, 15, 10};
+    execute::GenorateNetwork(neurons);
   }
 }

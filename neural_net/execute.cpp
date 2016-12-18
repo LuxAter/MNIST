@@ -17,43 +17,42 @@ bool testing;
 }
 
 bool neural::execute::ExecutionCore() {
-  std::vector<double> output = FeedForward(trainingset[0].pixels);
-  for (int i = 0; i < output.size(); i++) {
-    std::cout << output[i] << ",";
+  FeedForward(trainingset[0].pixels);
+  for (int i = 0; i < -1; i++) {
   }
-  std::cout << "\n";
   return (true);
 }
 
-double neural::execute::Sigmoid(double z) { return (1.0 / (1.0 + pow(e, -z))); }
-
-std::vector<double> neural::execute::Sigmoid(std::vector<double> z) {
-  for (int i = 0; i < z.size(); i++) {
-    z[i] = Sigmoid(z[i]);
-  }
-  return (z);
+double neural::execute::Sigmoid(double z) {
+  return (1.0 / (double)(1.0 + pow(e, z)));
 }
 
 std::vector<double> neural::execute::FeedForward(
-    std::vector<double> pixeldata) {
-  for (int i = 0; i < neuralnet.neurons[0].size() && i < pixeldata.size();
+    std::vector<double> inputdata) {
+  std::cout << "Running\n";
+  std::vector<double> returndata;
+  for (int i = 0; i < neuralnet.neurons[0].size() && i < inputdata.size();
        i++) {
-    neuralnet.neurons[0][i].value = pixeldata[i];
+    neuralnet.neurons[0][i].value = inputdata[i];
   }
   for (int i = 1; i < neuralnet.neurons.size(); i++) {
     for (int j = 0; j < neuralnet.neurons[i].size(); j++) {
-      double z =
-          Dot(neuralnet.neurons[i][j].weights, neuralnet.neurons[i - 1]) -
-          neuralnet.neurons[i][j].bias;
+      double z = 0;
+      for (int k = 0; k < neuralnet.neurons[i][j].weights.size(); k++) {
+        z += neuralnet.neurons[i - 1][k].value *
+             neuralnet.neurons[i][j].weights[k];
+      }
+      z += neuralnet.neurons[i][j].bias;
       neuralnet.neurons[i][j].value = Sigmoid(z);
     }
   }
-  std::vector<double> returndata;
   for (int i = 0; i < neuralnet.neurons[neuralnet.neurons.size() - 1].size();
        i++) {
     returndata.push_back(
         neuralnet.neurons[neuralnet.neurons.size() - 1][i].value);
+    std::cout << returndata[i] << ",";
   }
+  std::cout << "\n";
   return (returndata);
 }
 
@@ -79,14 +78,6 @@ bool neural::execute::GenorateNetwork(std::vector<int> neurons) {
     neuralnet.neurons.push_back(layer);
   }
   return (true);
-}
-
-double neural::execute::Dot(std::vector<double> a, std::vector<Neuron> b) {
-  double product = 0;
-  for (int i = 0; i < a.size() && i < b.size(); i++) {
-    product += (a[i] * b[i].value);
-  }
-  return (product);
 }
 
 double neural::execute::drand() { return ((double)rand() / RAND_MAX); }
